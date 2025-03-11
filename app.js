@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express();
+// const router = express.Router();
 
 
 // app.use('/error', (req, res, next) => {
@@ -20,24 +21,35 @@ const app = express();
 //     }
 // })
 
-app.use((err, req, res, next) => {
-    console.log(err.stack);
+// app.use((err, req, res, next) => {
+//     console.log(err.stack);
 
-    if(err.message === 'No encontrado'){
-        return res.status(404).json({
-            massage: 'Recurso no encontrad',
-            error: err.message,
-        })
-    }
+//     if(err.message === 'No encontrado'){
+//         return res.status(404).json({
+//             massage: 'Recurso no encontrad',
+//             error: err.message,
+//         })
+//     }
 
-    res.status(500).json({
-        message: 'Algo salió mal',
-        error: err.message,
-    })
-})
+//     res.status(500).json({
+//         message: 'Algo salió mal',
+//         error: err.message,
+//     })
+// })
 
+// // Ruta GET en el router
+// router.get('/', (req, res)=> {
+//     res.send("Esta es la ruta principal del router");
+// })
 
+// // Ruta POST en el router
+// router.post('/enviar', (req, res) => {
+//     res.send("Datos enviados");
+// })
 
+const usuariosRouter = require('./routes/usuarios');
+
+app.use('/api/usuarios', usuariosRouter);
 
 
 app.listen(3000, () => {
